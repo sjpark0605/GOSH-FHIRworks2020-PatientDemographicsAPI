@@ -12,4 +12,4 @@ API that utilizes FHIR records to graph information regarding patients' demograp
 
 3. Execute the PatientDemographicsAPI.py via Python3
 
-4. Demonstrator can be accessed at http://localhost:8910/
+- Note: Demonstrator can be accessed at http://localhost:8910/
