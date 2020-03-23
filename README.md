@@ -6,10 +6,12 @@ API that utilizes FHIR records to graph information regarding patients' demograp
 - FHIR Parser by Ethan: https://github.com/greenfrogs/FHIR-Parser
 
 ## Source guide
-- 
-- 
-- 
-- 
+
+PatientDemographicsAPI.py
+- DemographicsUtility.py - Helper source code that contains functions for graphing and json generation
+- PatientDemographicsAPI.py - The API powered by Flask
+- templates/Demonstrator.html - HTML for the API Demonstrator
+- requirements.txt - version requirements for package
 
 ## Deployment Instructions
 1. Run the FHIR Records Database by following the deployment guide: https://github.com/goshdrive/FHIRworks_2020/blob/master/README.md 
