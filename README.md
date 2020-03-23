@@ -5,6 +5,12 @@ API that utilizes FHIR records to graph information regarding patients' demograp
 - FHIR Records Database: https://github.com/goshdrive/FHIRworks_2020
 - FHIR Parser by Ethan: https://github.com/greenfrogs/FHIR-Parser
 
+## Source guide
+- 
+- 
+- 
+- 
+
 ## Deployment Instructions
 1. Run the FHIR Records Database by following the deployment guide: https://github.com/goshdrive/FHIRworks_2020/blob/master/README.md 
 
