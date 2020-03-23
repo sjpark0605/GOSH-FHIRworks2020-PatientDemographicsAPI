@@ -3,7 +3,7 @@ API that utilizes FHIR records to graph information regarding patients' demograp
 
 ## Requirements
 - FHIR Records Database: https://github.com/goshdrive/FHIRworks_2020
-- FHIR Parser by Ethan: https://github.com/greenfrogs/FHIR-Parser
+- FHIR Parser by greenfrogs (Ethan): https://github.com/greenfrogs/FHIR-Parser
 
 ## Source guide
 
