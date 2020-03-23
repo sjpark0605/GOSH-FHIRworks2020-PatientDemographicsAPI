@@ -10,7 +10,7 @@ API that utilizes FHIR records to graph information regarding patients' demograp
 PatientDemographicsAPI.py
 - DemographicsUtility.py - Helper source code that contains functions for graphing and json generation
 - PatientDemographicsAPI.py - The API powered by Flask
-- requirements.txt - version requirements for package
+- requirements.txt - Python library version requirements for package
 - templates/Demonstrator.HTML | --- Demonstrator.html - HTML for the API Demonstrator
 
 
