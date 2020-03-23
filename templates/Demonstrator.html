@@ -1,0 +1,141 @@
+<!DOCTYPE HTML>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+        <title>FHIR Record Graphing Demonstrator</title>
+
+        <style>
+            .column {
+            float: left;
+            width: 50%;
+            }
+        
+            .row:after {
+            content: "";
+            display: table;
+            clear: both;
+            }
+        </style>
+
+    </head>
+
+    <body>
+        <h1 style="text-align:center">FHIR Record Graphing API Demonstrator</h1>
+        <div class="row">
+            <div class="column" style="padding-left: 5%;" id="demo-selector">
+                <br>
+                <h4>Please Select a General Demographic Characterstic to Investigate</h4>
+                <select id="demo_data_option">
+                    <option value="language">Language Spoken</option>
+                    <option value="gender">Gender</option>
+                    <option value="year_group">Age Group by Decades</option>
+                    <option value="marital">Marital Status</option>
+                    <option value="country">Country of Residence</option>
+                </select>
+                <button class="w3-button w3-red" id="demo-graph-button" type="button">Display Graph</button>
+                <button class="w3-button w3-green" id="demo-csv-button" type="button">Download CSV</button>
+                <br>
+                <div id="demo-image-result"></div>
+            </div>
+
+            <div class="column" style="padding-left: 5%" id="desc-selector">
+                <br>
+                <h4>Please Select a Type of Age Distribution to Investigate</h4>
+                <select id="desc_data_option">
+                    <option value="distribution">Population Distribution by Age</option>
+                    <option value="cumulative">Cumulative Population Distribution by Age</option>
+                </select>
+                <button class="w3-button w3-blue" id="desc-graph-button" type="button">Display Graph</button>
+                <button class="w3-button w3-purple" id="desc-csv-button" type="button">Download CSV</button>
+                <br>
+                <div id="desc-image-result"></div>
+            </div>
+        </div>
+
+    </body>
+
+    <script>
+
+        let currentURL = window.location.href
+
+        $(document).ready(function() {
+            $("#demo-graph-button").click(function() {
+                targetDiv = "#demo-image-result";
+                selection = $( "#demo_data_option option:selected").val();
+                loadGraph(targetDiv, selection);
+            });
+
+            $("#demo-csv-button").click(function() {
+                selection = $( "#demo_data_option option:selected").val();
+                fetchJSON(selection);
+            });
+
+            $("#desc-graph-button").click(function() {
+                targetDiv = "#desc-image-result";
+                selection = $( "#desc_data_option option:selected").val();
+                loadGraph(targetDiv, selection);
+            });
+
+            $("#desc-csv-button").click(function() {
+                selection = $( "#desc_data_option option:selected").val();
+                fetchJSON(selection);
+            });
+        });
+
+
+        function loadGraph(divName, selection){
+            $.ajax({
+                url: `${currentURL}demographics/graph?category=${selection}`,
+                type: "GET",
+            }).done(function(data) {
+                if (document.querySelector(`${divName} img`) != null) {
+                    document.querySelector(divName).removeChild(document.querySelector(`${divName} img`));
+                }
+                $(divName).append(`<img src="data:image/png;base64, ${data}"/>`)
+            }).fail(function(error) {
+                alert("fail: " + error);
+            });
+        }
+
+        function fetchJSON(selection){
+            $.ajax({
+                url: `${currentURL}demographics/csv?category=${selection}`,
+                type: "GET",
+            }).done(function(data) {
+                let json_result = JSON.parse(data);
+                generateCSV(json_result);
+            }).fail(function(error) {
+                alert("fail: " + error);
+            });
+        }
+
+        function convertToCSV(json_result) {
+            let keys = [];
+            let vals = [];
+            for (let x in json_result) {
+                keys.push(x);
+                vals.push(json_result[x]);
+            }
+
+            let result = "";
+            result += keys.join(",");
+            result += "\n";
+            result += vals.join(",");
+
+            return result;
+        }
+
+        function generateCSV(json_result) {
+            let csvData = convertToCSV(json_result);
+            let hiddenElement = document.createElement('a');
+            hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csvData);
+            hiddenElement.target = '_blank';
+            hiddenElement.download = 'result.csv';
+            hiddenElement.click();
+        }
+        
+    </script>
+</html>
