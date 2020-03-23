@@ -11,7 +11,7 @@ PatientDemographicsAPI.py
 - DemographicsUtility.py - Helper source code that contains functions for graphing and json generation
 - PatientDemographicsAPI.py - The API powered by Flask
 - requirements.txt - version requirements for package
-- templates \n\t\t | --- Demonstrator.html - HTML for the API Demonstrator
+- templates/Demonstrator.HTML | --- Demonstrator.html - HTML for the API Demonstrator
 
 
 ## Deployment Instructions
